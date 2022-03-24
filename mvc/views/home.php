@@ -19,7 +19,7 @@
         }
 
         .main{
-            background-image: url('./file/img/a.jpg');
+            /* background-image: url('./file/img/a.jpg'); */
             background-position: center;
             background-size: cover;
             height: auto;

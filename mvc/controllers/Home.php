@@ -7,16 +7,15 @@ class Home extends Controller{
     // Must have SayHi()
     function SayHi(){
         $teo = $this->model("homepage");
-        $this->view("index");
+        $this->view("home");
     }
 
-    function Show($a, $b){        
+    function Show(){        
         // Call Models
-        $teo = $this->model("SinhVienModel");
-        $tong = $teo->Tong($a, $b); // 3
+        $teo = $this->model("homepage");
 
         // Call Views
-        $this->view("index");
+        $this->view("home");
     }
 }
 ?>
