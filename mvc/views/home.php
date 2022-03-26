@@ -12,7 +12,7 @@
     <title>Hello Group 2 AWS</title>
     
     
-    
+    <link rel="icon" href="<?php echo BASE_URL ?>/public/img/logo.png">
 
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
     <style>
