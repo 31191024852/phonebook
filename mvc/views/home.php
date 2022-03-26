@@ -5,9 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
 
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    
     <meta name="viewport" content="width=device-width"/>
 
     <title>Hello Group 2 AWS</title>
+    
+    
+    
 
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
     <style>
@@ -19,7 +24,7 @@
         }
 
         .main{
-            /* background-image: url('./file/img/a.jpg'); */
+            background-image: url('./file/img/a.jpg');
             background-position: center;
             background-size: cover;
             height: auto;
@@ -55,15 +60,40 @@
 </head>
 
 <body>
-<div class="main">
-    <div>
-        <h1 class="logo">
-            HELLO GROUP 2 AWS
-        </h1>
+    <div class="container-fluid">
+        <div class="main">
+            <nav class="navbar">
+                <a href="<?php echo BASE_URL ?>/home">
+                    <img class="navbar-brand" src="<?php echo BASE_URL ?>/public/icon/logo.png" style="width:60px; float:left;">
+                </a>
+                
+                <div class="nav justify-content-end topnav">
+                        <a class="nav-link" href="<?php echo BASE_URL ?>/home">Trang Chủ</a>
+                        <a class="nav-link" href="">Danh Mục</a>
+                        <a class="nav-link" href="#">Khám Phá</a>
+                        <?php
+                            if(isset($_SESSION['ID'])){
+                            echo "<a  class= 'btn btn-primary' href='" . BASE_URL . "/logout'>Đăng xuất</a>";
+                            }
+                            else{
+                            echo "<a class='btn btn-primary btn-login' href='" . BASE_URL . "/login'>Sign in / Login</a>"; 
+                            }
+                        ?>
+                </div>
+            </nav>
+            
+            <div>
+                
+                <h1 class="logo">
+                 HELLO GROUP 2 AWS
+                </h1>
         
+            </div>
+        </div>
     </div>
-</div>
+
 <script src="https://code.jquery.com/jquery-1.12.4.min.js" type="text/javascript"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
 </html>
