@@ -133,3 +133,12 @@ body.my-login-page {
         padding: 15px;
     }
 }
+
+a:visited{
+    color: #FF421A;
+    font-weight: bold;
+}
+a:hover{
+    color: #ff921a !important;
+    text-decoration: none;
+}

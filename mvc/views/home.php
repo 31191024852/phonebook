@@ -24,7 +24,7 @@
         }
 
         .main{
-            background-image: url('./file/img/a.jpg');
+            background-image: url('./public/img/a.jpg');
             background-position: center;
             background-size: cover;
             height: auto;
@@ -46,8 +46,17 @@
             font-size: 500%;
             font-family: 'Palette Mosaic';
             left: 5%;
-            color: white;
+            color: #FF421A;
             -webkit-text-stroke: 1px black;
+        }
+        
+        a:visited{
+            color: #FF421A;
+            font-weight: bold;
+        }
+        a:hover{
+            color: #ff921a !important;
+            text-decoration: none;
         }
         
 
@@ -62,21 +71,21 @@
 <body>
     <div class="container-fluid">
         <div class="main">
-            <nav class="navbar">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-between">
                 <a href="<?php echo BASE_URL ?>/home">
-                    <img class="navbar-brand" src="<?php echo BASE_URL ?>/public/icon/logo.png" style="width:60px; float:left;">
+                    <img class="navbar-brand" src="<?php echo BASE_URL ?>/public/img/logo.png" style="width:60px; float:left;">
                 </a>
                 
-                <div class="nav justify-content-end topnav">
+                <div class="nav justify-content-end topnav" >
                         <a class="nav-link" href="<?php echo BASE_URL ?>/home">Trang Chủ</a>
                         <a class="nav-link" href="">Danh Mục</a>
-                        <a class="nav-link" href="#">Khám Phá</a>
+                        <a class="nav-link" href="">Khám Phá</a>
                         <?php
                             if(isset($_SESSION['ID'])){
-                            echo "<a  class= 'btn btn-primary' href='" . BASE_URL . "/logout'>Đăng xuất</a>";
+                            echo "<a  class= 'btn btn-primary' style='background-color:#fff' href='" . BASE_URL . "/logout'>Đăng xuất</a>";
                             }
                             else{
-                            echo "<a class='btn btn-primary btn-login' href='" . BASE_URL . "/login'>Sign in / Login</a>"; 
+                            echo "<a class='btn btn-primary btn-login' style='background-color:#fff'  href='" . BASE_URL . "/login'>Sign in / Login</a>"; 
                             }
                         ?>
                 </div>

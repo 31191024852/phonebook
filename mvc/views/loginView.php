@@ -73,7 +73,7 @@
                         </div>
                     </div>
                     <div class="footer-login">
-                        Copyright &copy; 2021 &mdash; BookStylist
+                        Copyright &copy; 2021 &mdash; BookSDT
                     </div>
                 </div>
             </div>
