@@ -37,9 +37,12 @@ class BookModel extends DB{
         $sql = "UPDATE tbl_friends SET name = '$name', company_name ='$companyname',number = '$number', email = '$email', address = '$address' WHERE id = $id";
         $result = $this->con->query($sql);
         if ($result) {
-            return true;
+        
+            echo "<script> alert('Cập nhật thành công');</script>";
         } else {
-            return false;
+            echo "<script> alert('Cập nhật dell thành công');</script>";
+
+            
         }
     }
     public function Fetch($id)
