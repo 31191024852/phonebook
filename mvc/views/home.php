@@ -14,12 +14,15 @@
     
     <link rel="icon" href="<?php echo BASE_URL ?>/public/img/logo.png">
 
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+
     <style>
 
         body{
-            
-            align-items: center;
+            color: #566787;
+            background: #f5f5f5;
+            font-family: 'Varela Round', sans-serif;
+            font-size: 14px;
+            align-items: center !important;
             
         }
 
@@ -51,7 +54,7 @@
         }
         
         a:visited{
-            color: #FF421A;
+            color: #FF421A !important;
             font-weight: bold;
         }
         a:hover{
@@ -72,13 +75,14 @@
     <div class="container-fluid">
         <div class="main">
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-between">
+                <div class="container">
                 <a href="<?php echo BASE_URL ?>/home">
                     <img class="navbar-brand" src="<?php echo BASE_URL ?>/public/img/logo.png" style="width:60px; float:left;">
                 </a>
                 
                 <div class="nav justify-content-end topnav" >
                         <a class="nav-link" href="<?php echo BASE_URL ?>/home">Trang Chủ</a>
-                        <a class="nav-link" href="">Danh Mục</a>
+                        <a class="nav-link" href="<?php echo BASE_URL ?>/book">Danh Bạ</a>
                         <a class="nav-link" href="">Khám Phá</a>
                         <?php
                             if(isset($_SESSION['ID'])){
@@ -89,6 +93,8 @@
                             }
                         ?>
                 </div>
+                </div>
+                
             </nav>
             
             <div>

@@ -6,19 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Phone book</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="icon" href="<?php echo BASE_URL ?>/public/img/logo.png">
     <style>
         body {
             color: #566787;
             background: #f5f5f5;
             font-family: 'Varela Round', sans-serif;
-            font-size: 13px;
+            font-size: 14px;
+            align-items: center !important;
         }
 
         .table-responsive {
@@ -288,6 +288,29 @@
         .modal form label {
             font-weight: normal;
         }
+
+        .main{
+            background-image: url('./public/img/a.jpg');
+            background-position: center;
+            background-size: cover;
+            height: auto;
+            left: 0;
+            min-height: 100%;
+            min-width: 100%;
+            position: absolute;
+            top: 0;
+            width: auto;
+        }
+        
+        
+        a:visited{
+            color: #FF421A !important;
+            font-weight: bold;
+        }
+        a:hover{
+            color: #ff921a !important;
+            text-decoration: none;
+        }
     </style>
     <script>
         $(document).ready(function() {
@@ -317,166 +340,194 @@
 </head>
 
 <body>
-    <div class="container-xl">
-        <div class="table-responsive">
-            <div class="table-wrapper">
-                <div class="table-title">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <h2>Phone <b>Book</b></h2>
-                        </div>
-                        <div class="col-sm-6">
-                            <a href="#addContactModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Contact</span></a>
-                            <a href="#deleteContactModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a>
+    <div class="container-fluid">
+    <div class="main">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-between">
+        <div class="container">
+            <a href="<?php echo BASE_URL ?>/home">
+                <img class="navbar-brand" src="<?php echo BASE_URL ?>/public/img/logo.png" style="width:60px; float:left;">
+            </a>
+                
+            <div class="nav justify-content-end topnav" >
+                    <a class="nav-link" href="<?php echo BASE_URL ?>/home">Trang Chủ</a>
+                    <a class="nav-link" href="<?php echo BASE_URL ?>/book">Danh Bạ</a>
+                    <a class="nav-link" href="">Khám Phá</a>
+                    <?php
+                        if(isset($_SESSION['ID'])){
+                        echo "<a  class= 'btn btn-primary' style='background-color:#fff' href='" . BASE_URL . "/logout'>Đăng xuất</a>";
+                        }
+                        else{
+                        echo "<a class='btn btn-primary btn-login' style='background-color:#fff'  href='" . BASE_URL . "/login'>Sign in / Login</a>"; 
+                        }
+                    ?>
+            </div>
+            </div>
+        </nav>
+            
+            
+    
+        <div class="container-xl">
+            <div class="table-responsive">
+                <div class="table-wrapper">
+                    <div class="table-title bg-dark">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <h2>Phone <b>Book</b></h2>
+                            </div>
+                            <div class="col-sm-6">
+                                <a href="#addContactModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Contact</span></a>
+                                <a href="#deleteContactModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <table id="data_table" class="table table-striped table-hover">
-                    <thead>
-                        <tr>
-                            <th>
+                    <table id="data_table" class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <span class="custom-checkbox">
+                                        <input type="checkbox" id="selectAll">
+                                        <label for="selectAll"></label>
+                                    </span>
+                                </th>
+                                <th hidden>Id</th>
+                                <th>Name</th>
+                                <th>Company Name</th>
+                                <th>Mobile</th>
+                                <th>Email</th>
+                                <th>Address</th>
+                                <th style="width:fit-content">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($data['contacts'] as $contact) {
+                                echo '<tr>
+                            <td>
                                 <span class="custom-checkbox">
-                                    <input type="checkbox" id="selectAll">
-                                    <label for="selectAll"></label>
+                                    <input type="checkbox" name="options[]" value="1">
+                                    <label for="checkbox1"></label>
                                 </span>
-                            </th>
-                            <th hidden>Id</th>
-                            <th>Name</th>
-                            <th>Company Name</th>
-                            <th>Mobile</th>
-                            <th>Email</th>
-                            <th>Address</th>
-                            <th style="width:fit-content">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($data['contacts'] as $contact) {
-                            echo '<tr>
-						<td>
-							<span class="custom-checkbox">
-								<input type="checkbox" name="options[]" value="1">
-								<label for="checkbox1"></label>
-							</span>
-						</td>
-                        <td class="fid" hidden>' . $contact['id'] . '</td>
-                        <td class="fname">' . $contact['name'] . '</td>
-                        <td class="fcname">' . $contact['company_name'] . '</td>
-                        <td class="fnumber">' . $contact['number'] . '</td>
-                        <td class="femail">' . $contact['email'] . '</td>
-                        <td class="faddress">' . $contact['address'] . '</td>
-						<td>
-							<a href="#editContactModal" class="edit" name="e_' . $contact['id'] . '" id="e_' . $contact['id'] . '" class="editbtn" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-							<a href="#deleteContactModal" class="delete" name="d_' . $contact['id'] . '" id="d_' . $contact['id'] . '"data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                            <a href="#messageContactModal" class="message" name="m_' . $contact['id'] . '" id="m_' . $contact['id'] . '"data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Message">&#xe0c9;</i></a>
-						</td>
-					</tr>';
-                        } ?>
-                    </tbody>
-                </table>
+                            </td>
+                            <td class="fid" hidden>' . $contact['id'] . '</td>
+                            <td class="fname">' . $contact['name'] . '</td>
+                            <td class="fcname">' . $contact['company_name'] . '</td>
+                            <td class="fnumber">' . $contact['number'] . '</td>
+                            <td class="femail">' . $contact['email'] . '</td>
+                            <td class="faddress">' . $contact['address'] . '</td>
+                            <td>
+                                <a href="#editContactModal" class="edit" name="e_' . $contact['id'] . '" id="e_' . $contact['id'] . '" class="editbtn" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                                <a href="#deleteContactModal" class="delete" name="d_' . $contact['id'] . '" id="d_' . $contact['id'] . '"data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                                <a href="#messageContactModal" class="message" name="m_' . $contact['id'] . '" id="m_' . $contact['id'] . '"data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Message">&#xe0c9;</i></a>
+                            </td>
+                        </tr>';
+                            } ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- add Modal HTML -->
+        <div id="addContactModal" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form method="post" id="add_form">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Add Contact</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label>Name</label>
+                                <input name="name" id="name" type="text" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Company Name</label>
+                                <input name="companyname" id="companyname" type="text" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Mobile</label>
+                                <input name="number" id="number" type="text" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input name="email" id="email" type="email" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Address</label>
+                                <textarea name="address" id="address" class="form-control" required></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                            <input type="submit" name="add" id="add" class="btn btn-success" value="Add">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- Edit Modal HTML -->
+        <div id="editContactModal" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form method="post" id="edit_form">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Edit Contact</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group" hidden>
+                                <input type="text" id="e_id" name="e_id" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Name</label>
+                                <input type="text" id="e_name" name="e_name" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Company Name</label>
+                                <input type="text" id="e_companyname" name="e_companyname" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Mobile</label>
+                                <input type="text" id="e_number" name="e_number" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" id="e_email" name="e_email" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Address</label>
+                                <textarea class="form-control" id="e_address" name="e_address" required></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                            <input type="submit" name="save" id="save" class="btn btn-info" value="save">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- Delete Modal HTML -->
+        <div id="deleteContactModal" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form>
+                        <div class="modal-header">
+                            <h4 class="modal-title">Delete Contact</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Are you sure you want to delete these Contacts?</p>
+                            <p class="text-warning"><small>This action cannot be undone.</small></p>
+                        </div>
+                        <div class="modal-footer">
+                            <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                            <input type="submit" class="btn btn-danger" value="Delete">
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-    <!-- add Modal HTML -->
-    <div id="addContactModal" class="modal fade">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <form method="post" id="add_form">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Add Contact</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label>Name</label>
-                            <input name="name" id="name" type="text" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Company Name</label>
-                            <input name="companyname" id="companyname" type="text" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Mobile</label>
-                            <input name="number" id="number" type="text" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Email</label>
-                            <input name="email" id="email" type="email" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Address</label>
-                            <textarea name="address" id="address" class="form-control" required></textarea>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                        <input type="submit" name="add" id="add" class="btn btn-success" value="Add">
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <!-- Edit Modal HTML -->
-    <div id="editContactModal" class="modal fade">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <form method="post" id="edit_form">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Edit Contact</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group" hidden>
-                            <input type="text" id="e_id" name="e_id" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Name</label>
-                            <input type="text" id="e_name" name="e_name" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Company Name</label>
-                            <input type="text" id="e_companyname" name="e_companyname" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Mobile</label>
-                            <input type="text" id="e_number" name="e_number" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Email</label>
-                            <input type="email" id="e_email" name="e_email" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Address</label>
-                            <textarea class="form-control" id="e_address" name="e_address" required></textarea>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                        <input type="submit" name="save" id="save" class="btn btn-info" value="save">
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <!-- Delete Modal HTML -->
-    <div id="deleteContactModal" class="modal fade">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <form>
-                    <div class="modal-header">
-                        <h4 class="modal-title">Delete Contact</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    </div>
-                    <div class="modal-body">
-                        <p>Are you sure you want to delete these Contacts?</p>
-                        <p class="text-warning"><small>This action cannot be undone.</small></p>
-                    </div>
-                    <div class="modal-footer">
-                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                        <input type="submit" class="btn btn-danger" value="Delete">
-                    </div>
-                </form>
-            </div>
-        </div>
     </div>
 </body>
 <script>
