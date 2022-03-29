@@ -18,13 +18,21 @@ class Book extends Controller{
             $data->AddBook($iduser, $name, $companyname, $phone, $email, $address);
             header("Location: http://localhost/phonebook/book/show");
         }
-        if (isset($_POST["friend_id"])) {
-            $data->Fetch($_POST["friend_id"]);
-            $data->UpdateBook($_POST["friend_id"], $_POST["companyname"], $_POST["name"], $_POST["number"], $_POST["email"], $_POST["address"]);
+        if(isset($_POST['e_id'])){
+            $id = $_POST['e_id'];
+            $name = $_POST['e_name'];
+            $companyname = $_POST['e_companyname'];
+            $phone = $_POST['e_number'];
+            $email = $_POST['e_email'];
+            $address = $_POST['e_address'];
+           
+            $data->UpdateBook($id, $name, $companyname, $phone, $email, $address);
+            header("Location: http://localhost/phonebook/book/show");
         }
         if (isset($_POST["delete_id"])) {
             $data->DeleteBook($_POST["delete_id"]);
         }
+        
         // Call Views
         $this->view("book",["contacts"=>$list]);
     }

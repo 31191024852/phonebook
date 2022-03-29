@@ -32,7 +32,7 @@ class BookModel extends DB{
     }
 
     //update data from tbl_friends
-    public function UpdateBook($id,$companyname, $name, $number, $email, $address)
+    public function UpdateBook($id,$name,$companyname,  $number, $email, $address)
     {
         $sql = "UPDATE tbl_friends SET name = '$name', company_name ='$companyname',number = '$number', email = '$email', address = '$address' WHERE id = $id";
         $result = $this->con->query($sql);
@@ -41,13 +41,6 @@ class BookModel extends DB{
         } else {
             return false;
         }
-    }
-    public function Fetch($id)
-    {
-            $query = "SELECT * FROM tbl_friends WHERE id = $id";
-            $result = $this->con->query($query);
-            $row = mysqli_fetch_array($result);
-            echo json_encode($row);
     }
 }
 ?>
