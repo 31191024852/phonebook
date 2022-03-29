@@ -340,6 +340,7 @@
                                     <label for="selectAll"></label>
                                 </span>
                             </th>
+                            <th hidden>Id</th>
                             <th>Name</th>
                             <th>Company Name</th>
                             <th>Mobile</th>
@@ -357,16 +358,16 @@
 								<label for="checkbox1"></label>
 							</span>
 						</td>
-                        <td hidden>' . $contact['id'] . '</td>
-						<td>' . $contact['name'] . '</td>
-						<td>' . $contact['company_name'] . '</td>
-						<td>' . $contact['number'] . '</td>
-						<td>' . $contact['email'] . '</td>
-                        <td>' . $contact['address'] . '</td>
+                        <td class="fid" hidden>' . $contact['id'] . '</td>
+                        <td class="fname">' . $contact['name'] . '</td>
+                        <td class="fcname">' . $contact['company_name'] . '</td>
+                        <td class="fnumber">' . $contact['number'] . '</td>
+                        <td class="femail">' . $contact['email'] . '</td>
+                        <td class="faddress">' . $contact['address'] . '</td>
 						<td>
 							<a href="#editContactModal" class="edit" name="e_' . $contact['id'] . '" id="e_' . $contact['id'] . '" class="editbtn" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
 							<a href="#deleteContactModal" class="delete" name="d_' . $contact['id'] . '" id="d_' . $contact['id'] . '"data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                            <a href="#messageContactModal" class="delete" name="m_' . $contact['id'] . '" id="m_' . $contact['id'] . '"data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Message">&#xe0c9;</i></a>
+                            <a href="#messageContactModal" class="message" name="m_' . $contact['id'] . '" id="m_' . $contact['id'] . '"data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Message">&#xe0c9;</i></a>
 						</td>
 					</tr>';
                         } ?>
@@ -418,12 +419,15 @@
     <div id="editContactModal" class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form>
+                <form method="post" id="edit_form">
                     <div class="modal-header">
                         <h4 class="modal-title">Edit Contact</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     </div>
                     <div class="modal-body">
+                        <div class="form-group" hidden>
+                            <input type="text" id="e_id" name="e_id" class="form-control" required>
+                        </div>
                         <div class="form-group">
                             <label>Name</label>
                             <input type="text" id="e_name" name="e_name" class="form-control" required>
@@ -447,7 +451,7 @@
                     </div>
                     <div class="modal-footer">
                         <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                        <input type="submit" class="btn btn-info" value="Save">
+                        <input type="submit" name="save" id="save" class="btn btn-info" value="save">
                     </div>
                 </form>
             </div>
@@ -478,23 +482,16 @@
 <script>
     $(document).ready(function() {
         $(document).on('click', '.edit', function() {
-            var friend_id = $(this).attr("id").substring(2);
-            $.ajax({
-                url: "./mvc/controllers/book.php",
-                method: "POST",
-                data: {
-                    friend_id: friend_id
-                },
-                dataType: "json",
-                success: function(data) {
-                    $('#e_name').val(data['name']);
-                    $('#e_companyname').val(data['companyname']);
-                    $('#e_number').val(data['number']);
-                    $('#e_email').val(data['email']);
-                    $('#e_address').val(data['address']);
-                    $('#editContactModal').modal('show');
-                }
-            });
+            
+            var currentTD = $(this).parents('tr').find('td');
+            //popup
+            $('#e_id').val(currentTD.parent().find('.fid').text());
+            $('#e_name').val(currentTD.parent().find('.fname').text());
+            $('#e_companyname').val(currentTD.parent().find('.fcname').text());
+            $('#e_number').val(currentTD.parent().find('.fnumber').text());
+            $('#e_email').val(currentTD.parent().find('.femail').text());
+            $('#e_address').val(currentTD.parent().find('.faddress').text());
+    
         });
 
         $(document).on('click', '.delete', function() {
@@ -506,7 +503,7 @@
                     delete_id: delete_id
                 },
                 success: function(data) {
-                    $('#editContactModal').modal('hide');
+                    $('#deleteContactModal').modal('hide');
                 }
             });
         });
