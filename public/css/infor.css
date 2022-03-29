@@ -1,0 +1,50 @@
+.infor-account{
+    background-color: #ff401aa1     ;
+}
+.head-infor-account{
+    margin: 35px 0px ;
+    margin-top: 40px;
+
+}
+.block-infor{
+    position: relative;
+   
+    background-color: rgba(146, 142, 139, 0.089);
+    padding: 30px 20px;
+    border-radius: 10px;
+}
+.row-infor{
+    margin-bottom: 10px;
+}
+.lable{
+    margin-top: 7px;
+    margin-left: 70px;
+}
+
+
+.change-password{
+
+    margin-top: 8px;
+    color: #FF421A;
+    border: none;
+    margin-left: 10px;
+
+    
+}
+.change-password:hover{
+    cursor: pointer;
+    color: #b9351a;
+}
+.btn-update{
+    
+    background-color: #FF421A;
+    border-radius: 20px;
+    color: #fff;
+    border: none;
+    padding: 10px;
+   
+    
+
+}
+
+
