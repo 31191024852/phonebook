@@ -4,11 +4,12 @@
 
 class Book extends Controller{
     function Show(){
-        //call model
+        if(isset($_SESSION['ID'])){
+            //call model
         $data = $this->model("bookModel");
         $list = $data->GetBook();
         if(isset($_POST['name'])){
-            $iduser = "3";
+            $iduser = $_SESSION['ID'];
             $name = $_POST['name'];
             $companyname = $_POST['companyname'];
             $phone = $_POST['number'];
@@ -31,10 +32,14 @@ class Book extends Controller{
         }
         if (isset($_POST["delete_id"])) {
             $data->DeleteBook($_POST["delete_id"]);
+            header("Location: book");
         }
         
         // Call Views
         $this->view("book",["contacts"=>$list]);
+        }else{
+            $teo = $this->model("homepage");
+            $this->view("home");
+        }
     }
 }
-?>

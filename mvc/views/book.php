@@ -511,12 +511,18 @@
             <div id="deleteContactModal" class="modal fade">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <form>
+                        <form method="post">
                             <div class="modal-header">
                                 <h4 class="modal-title">Delete Contact</h4>
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                             </div>
                             <div class="modal-body">
+                                <?php 
+                                    if(isset($_SESSION)){
+                                        echo '<input type="text" id="d_id" name="delete_id" class="form-control" hidden>';
+                                    }
+                                ?>
+                                
                                 <p>Are you sure you want to delete these Contacts?</p>
                                 <p class="text-warning"><small>This action cannot be undone.</small></p>
                             </div>
@@ -534,7 +540,6 @@
 <script>
     $(document).ready(function() {
         $(document).on('click', '.edit', function() {
-
             var currentTD = $(this).parents('tr').find('td');
             //popup
             $('#e_id').val(currentTD.parent().find('.fid').text());
@@ -545,20 +550,11 @@
             $('#e_address').val(currentTD.parent().find('.faddress').text());
 
         });
-
         $(document).on('click', '.delete', function() {
-            var delete_id = $(this).attr("id").substring(2);
-            $.ajax({
-                url: "./mvc/controllers/book.php",
-                method: "POST",
-                data: {
-                    delete_id: delete_id
-                },
-                success: function(data) {
-                    $('#deleteContactModal').modal('hide');
-                }
-            });
+            var currentTD = $(this).parents('tr').find('td');
+            $('#d_id').val(currentTD.parent().find('.fid').text())
         });
+
     });
 </script>
 
