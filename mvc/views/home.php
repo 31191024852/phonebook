@@ -66,6 +66,7 @@
     </style>
 
     <!--     Fonts     -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Palette Mosaic' rel='stylesheet'>
 
@@ -83,7 +84,7 @@
                 <div class="nav justify-content-end topnav" >
                         <a class="nav-link" href="<?php echo BASE_URL ?>/home">Trang Chủ</a>
                         <a class="nav-link" href="<?php echo BASE_URL ?>/book">Danh Bạ</a>
-                        <a class="nav-link" href="">Khám Phá</a>
+                        <a class="nav-link" href="<?php echo BASE_URL ?>/infor">Tài Khoản</a>
                         <?php
                             if(isset($_SESSION['ID'])){
                             echo "<a  class= 'btn btn-primary' style='background-color:#fff' href='" . BASE_URL . "/logout'>Đăng xuất</a>";

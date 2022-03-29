@@ -16,7 +16,7 @@ class Book extends Controller{
             $address = $_POST['address'];
            
             $data->AddBook($iduser, $name, $companyname, $phone, $email, $address);
-            header("Location: http://localhost/phonebook/book/show");
+            header("Location: book");
         }
         if(isset($_POST['e_id'])){
             $id = $_POST['e_id'];
@@ -27,7 +27,7 @@ class Book extends Controller{
             $address = $_POST['e_address'];
            
             $data->UpdateBook($id, $name, $companyname, $phone, $email, $address);
-            header("Location: http://localhost/phonebook/book/show");
+            header("Location: book");
         }
         if (isset($_POST["delete_id"])) {
             $data->DeleteBook($_POST["delete_id"]);
