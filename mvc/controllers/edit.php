@@ -1,5 +1,5 @@
 <?php
-require_once "./mvc/models/bookModel.php";
+require_once("../../mvc/models/bookModel.php");
 
 if(isset($_SESSION["ID"])){
     $data = new BookModel();

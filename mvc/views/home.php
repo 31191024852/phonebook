@@ -78,7 +78,7 @@
                 
                 <div class="nav justify-content-end topnav" >
                         <a class="nav-link" href="<?php echo BASE_URL ?>/home">Trang Chủ</a>
-                        <a class="nav-link" href="">Danh Mục</a>
+                        <a class="nav-link" href="<?php echo BASE_URL ?>/book">Danh Bạ</a>
                         <a class="nav-link" href="">Khám Phá</a>
                         <?php
                             if(isset($_SESSION['ID'])){

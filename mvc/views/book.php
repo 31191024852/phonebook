@@ -362,7 +362,7 @@
             </a>
             <div class="nav justify-content-end topnav" >
                 <a class="nav-link" href="<?php echo BASE_URL ?>/home">Trang Chủ</a>
-                <a class="nav-link" href="">Danh Mục</a>
+                <a class="nav-link" href="<?php echo BASE_URL ?>/book">Danh Bạ</a>
                 <a class="nav-link" href="">Khám Phá</a>
                             <?php
                                 if(isset($_SESSION['ID'])){
@@ -475,7 +475,7 @@
         <div id="editContactModal" class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <form id="editContact">
+                    <form method="post" id="editContact">
                         <div class="modal-header">
                             <h4 class="modal-title">Edit Contact</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -549,15 +549,12 @@
             $('#e_number').val(currentTD.parent().find('.fnumber').text());
             $('#e_email').val(currentTD.parent().find('.femail').text());
             $('#e_address').val(currentTD.parent().find('.faddress').text());
-    
-        });
-        $('#editContact').submit(function(){
-            var friend_id = $('#e_id').val();
+            
             $.ajax({
-                url: "./mvc/controllers/edit.php",
+                url: "./mvc/controllers/book.php",
                 method: "POST",
                 data: {
-                    friend_id: friend_id,
+                    friend_id:  $('#e_id').val(),
                     companyname: $('#e_companyname').val(),
                     name: $('#e_name').val(),
                     number: $('#e_number').val(),
@@ -569,12 +566,31 @@
                     $('#editContactModal').modal('hide');
                 }
             });
-        })
+        });
+        // $('#editContact').submit(function(){
+        //     var friend_id = $('#e_id').val();
+        //     $.ajax({
+        //         url: "./mvc/controllers/edit.php",
+        //         method: "POST",
+        //         data: {
+        //             friend_id: friend_id,
+        //             companyname: $('#e_companyname').val(),
+        //             name: $('#e_name').val(),
+        //             number: $('#e_number').val(),
+        //             email: $('#email').val(),
+        //             address: $('#e_address').val()
+        //         },
+        //         success: function(data) {
+        //             alert(data);
+        //             $('#editContactModal').modal('hide');
+        //         }
+        //     });
+        // })
 
         $(document).on('click', '.delete', function() {
             var delete_id = $(this).attr("id").substring(2);
             $.ajax({
-                url: "./mvc/controllers/edit.php",
+                url: "./mvc/controllers/book.php",
                 method: "POST",
                 data: {
                     delete_id: delete_id
