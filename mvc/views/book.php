@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <link rel="icon" href="<?php echo BASE_URL ?>/public/img/logo.png">
     <style>
@@ -614,6 +615,28 @@
         </div>
     </div>
     <div class="update">
+        <?php
+            if(isset($_GET['send'])){
+                if($_GET['send']=='done'){
+                echo "<div id='kqBook' class='modal fade'>
+                        <div class='modal-dialog modal-dialog-centered'>
+                            <div style='background:	#FF421a; border-radius: 30px; padding: 50px; '>
+                                <h2 style='text-align: center; color: #fff'>Gửi thành công.</h2>
+                            </div>  
+                        </div>
+                    </div>";
+                }else if($_GET['send']=='fail'){
+                echo "<div id='kqBook' class='modal fade'>
+                        <div class='modal-dialog modal-dialog-centered'>
+                            <div style='background:	#D82828; border-radius: 30px; padding: 50px; '>
+                                <h2 style='text-align: center; color: #fff'>Gửi thất bại</h2>
+                                <p style='text-align: center; color: #fff'>Vui lòng kiểm tra lại SĐT hoặc là Token của bạn vì Twillio có thể thay đổi trong 24h </p>
+                            </div>  
+                        </div>
+                    </div>";
+                }
+            }
+        ?>
     </div>
 </body>
 <script>
@@ -643,22 +666,10 @@
             $('#s_email').text(currentTD.parent().find('.femail').text());
             $('#s_address').text(currentTD.parent().find('.faddress').text());
         })
-
-        $('#smsContactForm').on('submit', function(e) {
-            e.preventDefault();
-            str = $(this).serialize();
-            $.post('./mvc/controllers/send.php',
-                    $(this).serialize()
-                )
-                .done(function(data) {
-                    $('#smsContactModal').modal('hide');
-                    $('.update').html(data);
-                    $('#kqBook').modal('show')
-                    setTimeout(function() {
-                        location.reload();
-                    }, 2000)
-                });
-        })
+        
+        $('#kqBook').modal('show')
+                    
+        
     });
 </script>
 

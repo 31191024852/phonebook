@@ -20,10 +20,10 @@ class informa extends DB{
             $SID = $_POST['SID'];
             $token = $_POST['token'];
             if ($passwordUser == $password && $newPass == $repassword) {
-                $qr = "UPDATE tbl_users SET `name` ='$userName',`company`='$location',`number`='$phoneUser',`email`='$email','password'='$newPass', 'SID' = $SID ,'token' = $token WHERE id_user=$id";
+                $qr = "UPDATE tbl_users SET `name` ='$userName',`company`='$location', `SID` = '$SID' ,`token` = '$token',`number`='$phoneUser',`email`='$email','password'='$newPass' WHERE id_user=$id";
                 $result = mysqli_query($this->con, $qr);
             } elseif ($password=='' && $newPass==''&& $repassword=='') {
-                $qr = "UPDATE tbl_users SET `name` ='$userName',`company`='$location',`number`='$phoneUser',`email`='$email',  'SID' = '$SID' ,'token' = '$token'  WHERE id_user= $id ";
+                $qr = "UPDATE tbl_users SET `name` ='$userName',`company`='$location',`SID` = '$SID' ,`token` = '$token',`number`='$phoneUser',`email`='$email'  WHERE id_user= $id ";
                 $result = mysqli_query($this->con, $qr);
                
             } else{

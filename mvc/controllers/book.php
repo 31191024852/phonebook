@@ -34,6 +34,14 @@ class Book extends Controller{
             $data->DeleteBook($_POST["delete_id"]);
             header("Location: book");
         }
+        if( isset($_POST["s_id"])){
+            $data2 = $this->model('sms');
+            if($data2->Send($_POST["s_id"],$_POST["s_message"])){
+                header("Location: ".BASE_URL."/book&send=done");
+            }else{
+                header("Location: ".BASE_URL."/book&send=fail");
+            }
+        }
         
         // Call Views
         $this->view("book",["contacts"=>$list]);
