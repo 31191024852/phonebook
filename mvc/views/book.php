@@ -313,6 +313,34 @@
             color: #ff921a !important;
             text-decoration: none;
         }
+
+        a>nav {
+            color: #FF421A !important;
+            font-weight: bold;
+        }
+
+        .form-sms {
+            font-size: 15px;
+            display: inline;
+        }
+
+        .br {
+            margin-top: 20px !important;
+        }
+
+        .modal-body {
+            padding: 10px 30px !important;
+        }
+
+        .modal-header {
+            background-color: #212529 !important;
+            color: #fff !important;
+        }
+
+        .modal-content {
+            border: none !important;
+            border-radius: 5px !important;
+        }
     </style>
     <script>
         $(document).ready(function() {
@@ -365,8 +393,6 @@
                 </div>
             </nav>
 
-
-
             <div class="container-xl">
                 <div class="table-responsive">
                     <div class="table-wrapper">
@@ -417,7 +443,7 @@
                             <td>
                                 <a href="#editContactModal" class="edit" name="e_' . $contact['id'] . '" id="e_' . $contact['id'] . '" class="editbtn" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                                 <a href="#deleteContactModal" class="delete" name="d_' . $contact['id'] . '" id="d_' . $contact['id'] . '"data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                                <a href="#messageContactModal" class="message" name="m_' . $contact['id'] . '" id="m_' . $contact['id'] . '"data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Message">&#xe0c9;</i></a>
+                                <a href="#smsContactModal" class="sms" name="m_' . $contact['id'] . '" id="m_' . $contact['id'] . '"data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Message">&#xe0c9;</i></a>
                             </td>
                         </tr>';
                                 } ?>
@@ -517,12 +543,12 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                             </div>
                             <div class="modal-body">
-                                <?php 
-                                    if(isset($_SESSION)){
-                                        echo '<input type="text" id="d_id" name="delete_id" class="form-control" hidden>';
-                                    }
+                                <?php
+                                if (isset($_SESSION)) {
+                                    echo '<input type="text" id="d_id" name="delete_id" class="form-control" hidden>';
+                                }
                                 ?>
-                                
+
                                 <p>Are you sure you want to delete these Contacts?</p>
                                 <p class="text-warning"><small>This action cannot be undone.</small></p>
                             </div>
@@ -534,7 +560,60 @@
                     </div>
                 </div>
             </div>
+            <!-- SMS modal -->
+            <div class="modal fade" id="smsContactModal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <form method="POST" id="smsContactForm">
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h4 class="modal-title">SMS</h4>
+                                <button type="button" class="btn-close" data-dismiss="modal"></button>
+                            </div>
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                                <div class="form-group" hidden>
+                                    <input type="text" id="s_id" name="s_id" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Name: </label>
+                                    <h5 id="s_name" name="s_name" class="form-sms"></h5>
+                                </div>
+                                <div class="form-group br">
+                                    <label>Company Name: </label>
+                                    <h5 id="s_companyname" name="s_companyname" class="form-sms"></h5>
+                                </div>
+                                <div class="form-group br">
+                                    <label>Mobile: </label>
+                                    <h5 type="text" id="s_number" name="s_number" class="form-sms"></h5>
+                                </div>
+                                <div class="form-group br">
+                                    <label>Email: </label>
+                                    <h5 type="email" id="s_email" name="s_email" class="form-sms"></h5>
+                                </div>
+                                <div class="form-group br">
+                                    <label>Address: </label>
+                                    <h5 class="form-sms" id="s_address" name="s_address"></h5>
+                                </div>
+                                <div class="form-group br">
+                                    <label>Message: </label>
+                                    <textarea class="form-control" id="s_message" name="s_message"></textarea>
+                                </div>
+
+                            </div>
+
+                            <!-- Modal footer -->
+                            <div class="modal-footer justify-content-between">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Send</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
+    </div>
+    <div class="update">
     </div>
 </body>
 <script>
@@ -555,6 +634,31 @@
             $('#d_id').val(currentTD.parent().find('.fid').text())
         });
 
+        $(document).on('click', '.sms', function() {
+            var currentTD = $(this).parents('tr').find('td');
+            $('#s_id').val(currentTD.parent().find('.fid').text());
+            $('#s_name').text(currentTD.parent().find('.fname').text());
+            $('#s_companyname').text(currentTD.parent().find('.fcname').text());
+            $('#s_number').text(currentTD.parent().find('.fnumber').text());
+            $('#s_email').text(currentTD.parent().find('.femail').text());
+            $('#s_address').text(currentTD.parent().find('.faddress').text());
+        })
+
+        $('#smsContactForm').on('submit', function(e) {
+            e.preventDefault();
+            str = $(this).serialize();
+            $.post('./mvc/controllers/send.php',
+                    $(this).serialize()
+                )
+                .done(function(data) {
+                    $('#smsContactModal').modal('hide');
+                    $('.update').html(data);
+                    $('#kqBook').modal('show')
+                    setTimeout(function() {
+                        location.reload();
+                    }, 2000)
+                });
+        })
     });
 </script>
 

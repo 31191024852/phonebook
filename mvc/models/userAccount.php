@@ -17,6 +17,9 @@ class userAccount extends db
                     $row= mysqli_fetch_assoc($result);
                     $_SESSION['username'] = $row['username'];
                     $_SESSION['ID'] = $row['id_user'];
+                    $_SESSION['SID'] = $row['SID'];
+                    $_SESSION['token'] = $row['token'];
+                    $_SESSION['number'] = $row['number'];
                     header('Location:home');
                 }
                 else{

@@ -18,46 +18,53 @@
     <link rel="icon" href="<?php echo BASE_URL ?>/public/img/logo.png">
 
     <style>
+        body {
+            color: #566787;
+            background: #f5f5f5;
+            font-family: 'Varela Round', sans-serif;
+            font-size: 14px;
+            align-items: center !important;
 
-body{
-    color: #566787;
-    background: #f5f5f5;
-    font-family: 'Varela Round', sans-serif;
-    font-size: 14px;
-    align-items: center !important;
-    
-}
+        }
 
-.main{
-    background-image: url('./public/img/a.jpg');
-    background-position: center;
-    background-size: cover;
-    height: auto;
-    left: 0;
-    min-height: 100%;
-    min-width: 100%;
-    position: absolute;
-    top: 0;
-    width: auto;
-}
+        .main {
+            background-image: url('./public/img/a.jpg');
+            background-position: center;
+            background-size: cover;
+            height: auto;
+            left: 0;
+            min-height: 100%;
+            min-width: 100%;
+            position: absolute;
+            top: 0;
+            width: auto;
+        }
 
-a:visited{
-    color: #FF421A !important;
-    font-weight: bold;
-}
-a:hover{
-    color: #ff921a !important;
-    text-decoration: none;
-}
+        a:visited {
+            color: #FF421A !important;
+            font-weight: bold;
+        }
 
-label{
-    color: #FFf !important;
-    font-weight: bold;
-    font-size: 16px;
-}
+        a:hover {
+            color: #ff921a !important;
+            text-decoration: none;
+        }
 
+        label {
+            color: #FFf !important;
+            font-weight: bold;
+            font-size: 16px;
+        }
 
-</style>
+        .field-icon {
+            float: right;
+            padding-right: 25px;
+            margin-left: -20px;
+            margin-top: -25px;
+            position: relative;
+            z-index: 2;
+        }
+    </style>
 </head>
 
 <body>
@@ -178,6 +185,25 @@ label{
                             </div>
                         </div>
                     </div>
+
+                    <div class="row row-infor ">
+                        <div class="col-3 ">
+                            <label class="lable">SID: </label>
+                        </div>
+                        <div class="col-7">
+                            <input id="SID" name="SID" type="password" class="form-control forrm" value="<?php echo $data['GN']['SID'] ?>">
+                            <span toggle="#SID" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                        </div>
+                    </div>
+                    <div class="row row-infor ">
+                        <div class="col-3 ">
+                            <label class="lable">Token: </label>
+                        </div>
+                        <div class="col-7">
+                            <input id="token" name="token" type="password" class="form-control forrm" value="<?php echo $data['GN']['token'] ?>">
+                            <span toggle="#token" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                        </div>
+                    </div>
                     <div class="row justify-content-center">
                         <button type="submit" name="saveuser" class="btn-update col-4 ">Cập nhật</button>
                     </div>
@@ -195,7 +221,6 @@ label{
         $('.up').on('submit', function(e) {
             e.preventDefault();
             str = $(this).serialize();
-           
             $.post('./mvc/controllers/updatePro.php',
                     $(this).serialize()
                 )
@@ -204,10 +229,21 @@ label{
                     $('#kqBook').modal('show')
                     setTimeout(function() {
                         location.reload();
-                    },1000)
+                    }, 2000)
                 });
         })
-       
+
+        $(".toggle-password").click(function() {
+
+            $(this).toggleClass("fa-eye fa-eye-slash");
+            var input = $($(this).attr("toggle"));
+            if (input.attr("type") == "password") {
+                input.attr("type", "text");
+            } else {
+                input.attr("type", "password");
+            }
+        });
+
     });
 </script>
 

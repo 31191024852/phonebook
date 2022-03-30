@@ -17,11 +17,13 @@ class informa extends DB{
             $newPass = $_POST['newPass'];
             $repassword = $_POST['newPassConfirm'];
             $location = $_POST['Location'];
+            $SID = $_POST['SID'];
+            $token = $_POST['token'];
             if ($passwordUser == $password && $newPass == $repassword) {
-                $qr = "UPDATE tbl_users SET `name` ='$userName',`company`='$location',`number`='$phoneUser',`email`='$email','password'='$newPass' WHERE id_user=$id";
+                $qr = "UPDATE tbl_users SET `name` ='$userName',`company`='$location',`number`='$phoneUser',`email`='$email','password'='$newPass', 'SID' = $SID ,'token' = $token WHERE id_user=$id";
                 $result = mysqli_query($this->con, $qr);
             } elseif ($password=='' && $newPass==''&& $repassword=='') {
-                $qr = "UPDATE tbl_users SET `name` ='$userName',`company`='$location',`number`='$phoneUser',`email`='$email' WHERE id_user= $id ";
+                $qr = "UPDATE tbl_users SET `name` ='$userName',`company`='$location',`number`='$phoneUser',`email`='$email',  'SID' = '$SID' ,'token' = '$token'  WHERE id_user= $id ";
                 $result = mysqli_query($this->con, $qr);
                
             } else{
@@ -30,7 +32,7 @@ class informa extends DB{
             if ($result) {
                 echo "<div id='kqBook' class='modal fade'>
                     <div class='modal-dialog modal-dialog-centered'>
-                        <div style='background:	#00FF00; border-radius: 30px; padding: 50px; '>
+                        <div style='background:	#FF421a; border-radius: 30px; padding: 50px; '>
                             <h2 style='text-align: center; color: #fff'> Cập nhật thành công</h2>
                         </div>  
                     </div>
