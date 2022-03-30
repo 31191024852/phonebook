@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-    
+
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <link rel="icon" href="<?php echo BASE_URL ?>/public/img/logo.png">
     <style>
@@ -445,6 +445,7 @@
                                 <a href="#editContactModal" class="edit" name="e_' . $contact['id'] . '" id="e_' . $contact['id'] . '" class="editbtn" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                                 <a href="#deleteContactModal" class="delete" name="d_' . $contact['id'] . '" id="d_' . $contact['id'] . '"data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                                 <a href="#smsContactModal" class="sms" name="m_' . $contact['id'] . '" id="m_' . $contact['id'] . '"data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Message">&#xe0c9;</i></a>
+                                <a href="#emailContactModal" class="email" name="a_' . $contact['id'] . '" id="a_' . $contact['id'] . '"data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Email">&#xe158;</i></a>
                             </td>
                         </tr>';
                                 } ?>
@@ -573,6 +574,9 @@
                             </div>
                             <!-- Modal body -->
                             <div class="modal-body">
+                                <p>
+                                    Send your message in the form below by SMS.
+                                </p>
                                 <div class="form-group" hidden>
                                     <input type="text" id="s_id" name="s_id" class="form-control" required>
                                 </div>
@@ -612,12 +616,65 @@
                     </div>
                 </div>
             </div>
+            <!-- Email Modal -->
+            <div id="emailContactModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="btn-close" data-dismiss="modal"></button>
+                            <h4 class="modal-title">Contact Us</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form role="form" method="post" id="reused_form">
+                                <p>
+                                    Send your message in the form below and we will get back to you as early as possible.
+                                </p>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="g_id" name="g_id" hidden />
+                                </div>
+                                <div class="form-group">
+                                    <label for="name">
+                                        Name:</label>
+                                    <h5 type="text" class="form-sms" id="g_name" name="g_name" required maxlength="50"></h5>
+
+                                </div>
+                                <div class="form-group br">
+                                    <label for="email">
+                                        Email:</label>
+                                    <h5 type="email" class="form-sms" id="g_email" name="g_email" required maxlength="50"></h5>
+                                </div>
+                                <div class="form-group br">
+                                    <label for="email">
+                                        Subject:</label>
+                                    <input type="text" class="form-sms" id="g_subject" name="g_subject" required maxlength="50">
+                                </div>
+                                <div class="form-group br">
+                                    <label for="name">
+                                        Message:</label>
+                                    <textarea class="form-control" type="textarea" name="g_message" id="g_message" placeholder="Your Message Here" maxlength="6000" rows="7"></textarea>
+                                </div>
+
+                                <div class="modal-footer justify-content-between">
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-success btn-block" id="btnContactUs">Post It! →</button>
+                                </div>
+
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
         </div>
     </div>
     <div class="update">
         <?php
-            if(isset($_GET['send'])){
-                if($_GET['send']=='done'){
+        if (isset($_GET['send'])) {
+            if ($_GET['send'] == 'done') {
                 echo "<div id='kqBook' class='modal fade'>
                         <div class='modal-dialog modal-dialog-centered'>
                             <div style='background:	#FF421a; border-radius: 30px; padding: 50px; '>
@@ -625,7 +682,7 @@
                             </div>  
                         </div>
                     </div>";
-                }else if($_GET['send']=='fail'){
+            } else if ($_GET['send'] == 'fail') {
                 echo "<div id='kqBook' class='modal fade'>
                         <div class='modal-dialog modal-dialog-centered'>
                             <div style='background:	#D82828; border-radius: 30px; padding: 50px; '>
@@ -634,8 +691,8 @@
                             </div>  
                         </div>
                     </div>";
-                }
             }
+        }
         ?>
     </div>
 </body>
@@ -666,10 +723,17 @@
             $('#s_email').text(currentTD.parent().find('.femail').text());
             $('#s_address').text(currentTD.parent().find('.faddress').text());
         })
-        
+
+        $(document).on('click', '.email', function() {
+            var currentTD = $(this).parents('tr').find('td');
+            $('#g_id').val(currentTD.parent().find('.fid').text());
+            $('#g_name').text(currentTD.parent().find('.fname').text());
+            $('#g_email').text(currentTD.parent().find('.femail').text());
+        })
+
         $('#kqBook').modal('show')
-                    
-        
+
+
     });
 </script>
 

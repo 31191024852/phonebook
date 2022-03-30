@@ -42,6 +42,14 @@ class Book extends Controller{
                 header("Location: ".BASE_URL."/book&send=fail");
             }
         }
+        if( isset($_POST["g_id"])){
+            $data3 = $this->model('email');
+            if($data3->sendEmail($_POST["g_id"],$_POST["g_subject"],$_POST["g_message"])){
+                header("Location: ".BASE_URL."/book&send=done");
+            }else{
+                header("Location: ".BASE_URL."/book&send=fail");
+            }
+        }
         
         // Call Views
         $this->view("book",["contacts"=>$list]);
