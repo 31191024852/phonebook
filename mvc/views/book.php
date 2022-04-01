@@ -404,7 +404,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <a href="#addContactModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Contact</span></a>
-                                    <a href="#deleteContactModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a>
+                                    <a href="#emailContactModal2" class="btn btn-info email2" data-toggle="modal"><i class="material-icons">&#xe158;</i> <span>Send Email All</span></a>
                                 </div>
                             </div>
                         </div>
@@ -500,7 +500,7 @@
                         <form method="post" id="edit_form">
                             <div class="modal-header">
                                 <h4 class="modal-title">Edit Contact</h4>
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <button type="button" class="btn-close" data-dismiss="modal"></button>
                             </div>
                             <div class="modal-body">
                                 <div class="form-group" hidden>
@@ -623,8 +623,63 @@
                     <!-- Modal content-->
                     <div class="modal-content">
                         <div class="modal-header">
-                            <button type="button" class="btn-close" data-dismiss="modal"></button>
                             <h4 class="modal-title">Contact Us</h4>
+                            <button type="button" class="btn-close" data-dismiss="modal"></button>
+                            
+                        </div>
+                        <div class="modal-body">
+                            <form role="form" method="post" id="reused_form">
+                                <p>
+                                    Send your message in the form below and we will get back to you as early as possible.
+                                </p>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="g_id" name="g_id" hidden />
+                                </div>
+                                <div class="form-group">
+                                    <label for="name">
+                                        Name:</label>
+                                    <h5 type="text" class="form-sms" id="g_name" name="g_name" required maxlength="50"></h5>
+
+                                </div>
+                                <div class="form-group br">
+                                    <label for="email">
+                                        Email:</label>
+                                    <h5 type="email" class="form-sms" id="g_email" name="g_email" required maxlength="50"></h5>
+                                </div>
+                                <div class="form-group br">
+                                    <label for="email">
+                                        Subject:</label>
+                                    <input type="text" class="form-sms" id="g_subject" name="g_subject" required maxlength="50">
+                                </div>
+                                <div class="form-group br">
+                                    <label for="name">
+                                        Message:</label>
+                                    <textarea class="form-control" type="textarea" name="g_message" id="g_message" placeholder="Your Message Here" maxlength="6000" rows="7"></textarea>
+                                </div>
+
+                                <div class="modal-footer justify-content-between">
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-success btn-block" id="btnContactUs">Post It! →</button>
+                                </div>
+
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <!-- All Email -->
+            <div id="emailContactModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Contact Us</h4>
+                            <button type="button" class="btn-close" data-dismiss="modal"></button>
+                            
                         </div>
                         <div class="modal-body">
                             <form role="form" method="post" id="reused_form">
@@ -729,6 +784,20 @@
             $('#g_id').val(currentTD.parent().find('.fid').text());
             $('#g_name').text(currentTD.parent().find('.fname').text());
             $('#g_email').text(currentTD.parent().find('.femail').text());
+        })
+
+        $(document).on('click', '.email2', function(){
+            $('[data-toggle="tooltip"]').tooltip();
+
+            // Select/Deselect checkboxes
+            var checkbox = $('table tbody input[type="checkbox"]');
+            var a=[]
+            checkbox.each(function() {
+                if(this.checked==true) {
+                    a.push($(this).parent().find('.fid').val());
+                }
+            })
+            alert(a)
         })
 
         $('#kqBook').modal('show')
