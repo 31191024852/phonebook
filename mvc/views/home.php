@@ -61,6 +61,9 @@
             color: #ff921a !important;
             text-decoration: none;
         }
+        nav-link{
+            color: #FF421A !important;
+        }
         
 
     </style>

@@ -11,6 +11,11 @@
     <link rel="stylesheet" type="text/css" href="<?php echo BASE_URL ?>/public/css/login.css">
 
 </head>
+<style>
+    nav-link{
+            color: #FF421A !important;
+        }
+</style>
 
 <body class="my-login-page">
     <section class="h-100">

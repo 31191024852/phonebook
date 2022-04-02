@@ -342,6 +342,9 @@
             border: none !important;
             border-radius: 5px !important;
         }
+        nav-link{
+            color: #FF421A !important;
+        }
     </style>
     <script>
         $(document).ready(function() {

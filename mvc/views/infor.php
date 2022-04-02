@@ -64,6 +64,9 @@
             position: relative;
             z-index: 2;
         }
+        nav-link{
+            color: #FF421A !important;
+        }
     </style>
 </head>
 
@@ -112,7 +115,7 @@
                         <div class="col-3">
                             <label class="lable">Name: </label>
                         </div>
-                        <div class="col-7 ">
+                        <div class="col-6 ">
                             <input type="text" name="nameUser" class="form-control forrm" value="<?php echo $data['GN']['name'] ?>">
                         </div>
                     </div>
@@ -120,7 +123,7 @@
                         <div class="col-3 ">
                             <label class="lable">Company: </label>
                         </div>
-                        <div class="col-7">
+                        <div class="col-6">
                             <input type="text" name="Location" class="form-control forrm" value="<?php echo $data['GN']['company'] ?>">
                         </div>
                     </div>
@@ -128,7 +131,7 @@
                         <div class="col-3 ">
                             <label class="lable">PhoneNumber: </label>
                         </div>
-                        <div class="col-7">
+                        <div class="col-6">
                             <input type="text" name="phoneNumber" class="form-control forrm" value="<?php echo $data['GN']['number'] ?>">
                         </div>
                     </div>
@@ -136,7 +139,7 @@
                         <div class="col-3 ">
                             <label class="lable">Email: </label>
                         </div>
-                        <div class="col-7">
+                        <div class="col-6">
                             <input type="text" name="Emails" class="form-control forrm" value="<?php echo $data['GN']['email'] ?>">
                         </div>
                     </div>
@@ -144,7 +147,7 @@
                         <div class="col-3 ">
                             <label class="lable">User Name: </label>
                         </div>
-                        <div class="col-7">
+                        <div class="col-6">
                             <input type="text" class="form-control forrm" value="<?php echo $data['GN']['username'] ?>">
                         </div>
                     </div>
@@ -156,7 +159,8 @@
 
                             <input name="passwordUser" type="password" class="form-control inputclass formmk" name="password" required value="<?php echo $data['GN']['password'] ?>" readonly>
                         </div>
-                        <div class="change-password col-2" data-bs-toggle="collapse" data-bs-target="#password" style="font-weight: bold;">Thay đổi</div>
+                        <div class="change-password col-2" data-bs-toggle="collapse" data-bs-target="#password" style="font-weight: bold;">
+                        <div class="igochange">Thay đổi</div></div>
                     </div>
 
                     <div id="password" class="collapse">
@@ -164,7 +168,7 @@
                             <div class="col-3">
                                 <label class="lable">Mật khẩu cũ: </label>
                             </div>
-                            <div class="col-7 ">
+                            <div class="col-6 ">
                                 <input name="oldPass" type="password" class="form-control formmk" placeholder="Nhập mật khẩu cũ">
                             </div>
                         </div>
@@ -172,7 +176,7 @@
                             <div class="col-3">
                                 <label class="lable">Mật khẩu mới: </label>
                             </div>
-                            <div class="col-7 ">
+                            <div class="col-6 ">
                                 <input name="newPass" type="password" class="form-control formmk" placeholder="Nhập mật khẩu mới từ 6 đến 32 kí tự">
                             </div>
                         </div>
@@ -180,7 +184,7 @@
                             <div class="col-3">
                                 <label class="lable">Nhập lại: </label>
                             </div>
-                            <div class="col-7">
+                            <div class="col-6">
                                 <input name="newPassConfirm" type="password" class="form-control formmk" placeholder="Nhập lại mật khẩu mới">
                             </div>
                         </div>
@@ -190,7 +194,7 @@
                         <div class="col-3 ">
                             <label class="lable">SID: </label>
                         </div>
-                        <div class="col-7">
+                        <div class="col-6">
                             <input id="SID" name="SID" type="password" class="form-control forrm" value="<?php echo $data['GN']['SID'] ?>">
                             <span toggle="#SID" class="fa fa-fw fa-eye field-icon toggle-password"></span>
                         </div>
@@ -199,7 +203,7 @@
                         <div class="col-3 ">
                             <label class="lable">Token: </label>
                         </div>
-                        <div class="col-7">
+                        <div class="col-6">
                             <input id="token" name="token" type="password" class="form-control forrm" value="<?php echo $data['GN']['token'] ?>">
                             <span toggle="#token" class="fa fa-fw fa-eye field-icon toggle-password"></span>
                         </div>
