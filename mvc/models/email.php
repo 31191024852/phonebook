@@ -7,7 +7,7 @@ use PHPMailer\PHPMailer\Exception;
 // If necessary, modify the path in the require statement below to refer to the
 // location of your Composer autoload.php file.
 require './vendor/autoload.php';
-require './public/template/index.php';
+require './public/template/a.php';
 
 class email extends DB
 {
@@ -47,7 +47,8 @@ class email extends DB
             $bodyText =  $message;
 
             // The HTML-formatted body of the email
-            $bodyHtml = new Template();
+            $template = new Template();
+            $bodyHtml = $template->TemplateOne($message);
 
             $mail = new PHPMailer(true);
 
@@ -70,7 +71,7 @@ class email extends DB
                 // Specify the content of the message.
                 $mail->isHTML(true);
                 $mail->Subject    = $subject;
-                $mail->Body       = $bodyHtml->TemplateOne($message);
+                $mail->Body       = $bodyHtml;
                 $mail->AltBody    = $bodyText;
                 $mail->Send();
                 return true;
