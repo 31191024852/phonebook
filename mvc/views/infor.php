@@ -116,7 +116,7 @@
                             <label class="lable">Name: </label>
                         </div>
                         <div class="col-6 ">
-                            <input type="text" name="nameUser" class="form-control forrm" value="<?php echo $data['GN']['name'] ?>">
+                            <input type="text" name="nameU" class="form-control forrm" value="<?php echo $data['GN']['name'] ?>">
                         </div>
                     </div>
                     <div class="row row-infor ">
@@ -148,7 +148,7 @@
                             <label class="lable">User Name: </label>
                         </div>
                         <div class="col-6">
-                            <input type="text" class="form-control forrm" value="<?php echo $data['GN']['username'] ?>">
+                            <input type="text" name="nameUser" class="form-control forrm" value="<?php echo $data['GN']['username'] ?>">
                         </div>
                     </div>
                     <div class="row row-infor">
@@ -157,7 +157,7 @@
                         </div>
                         <div class="col-6 ">
 
-                            <input name="passwordUser" type="password" class="form-control inputclass formmk" name="password" required value="<?php echo $data['GN']['password'] ?>" readonly>
+                            <input name="passwordUser" type="password" class="form-control inputclass formmk" name="password" required value="<?php echo md5($data['GN']['password']) ?>" readonly>
                         </div>
                         <div class="change-password col-2" data-bs-toggle="collapse" data-bs-target="#password" style="font-weight: bold;">
                         <div class="igochange">Thay đổi</div></div>

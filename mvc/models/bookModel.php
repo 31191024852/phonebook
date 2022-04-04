@@ -1,13 +1,18 @@
 <?php 
 class BookModel extends DB{
     public function GetBook(){
-        $sql = "SELECT * FROM tbl_friends";
-        $result = $this->con->query($sql);
-        $data = array();
-        while($row = $result->fetch_assoc()){
-            $data[] = $row;
+        if(isset($_SESSION['ID'])){
+            $sql = "SELECT * FROM tbl_friends WHERE `id_user` = ".$_SESSION['ID'];
+            $result = $this->con->query($sql);
+            $data = array();
+            while($row = $result->fetch_assoc()){
+                $data[] = $row;
+            }
+            return $data;
+        }else{
+            return null;
         }
-        return $data;
+        
     }
 //add data to tbl_friends
     public function AddBook($iduser, $name, $companyname, $number, $email, $address){

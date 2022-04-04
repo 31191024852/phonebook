@@ -8,22 +8,23 @@ class informa extends DB{
     }
     public function updateInfo($id)
     {
-        if (isset($_POST['nameUser'])) {
+        if (isset($_POST['nameU'])) {
+            $name= $_POST['nameU'];
             $userName = $_POST['nameUser'];
             $phoneUser = $_POST['phoneNumber'];
             $email = $_POST['Emails'];
             $passwordUser = $_POST['passwordUser'];
             $password = $_POST['oldPass'];
             $newPass = $_POST['newPass'];
-            $repassword = $_POST['newPassConfirm'];
+            $rePassword = $_POST['newPassConfirm'];
             $location = $_POST['Location'];
             $SID = $_POST['SID'];
             $token = $_POST['token'];
-            if ($passwordUser == $password && $newPass == $repassword) {
-                $qr = "UPDATE tbl_users SET `name` ='$userName',`company`='$location', `SID` = '$SID' ,`token` = '$token',`number`='$phoneUser',`email`='$email','password'='$newPass' WHERE id_user=$id";
+            if (md5($password) == $passwordUser && $newPass == $rePassword) {
+                $qr = "UPDATE tbl_users SET  `username` ='$userName',`company`='$location', `SID` = '$SID' ,`token` = '$token',`number`='$phoneUser',`email`='$email',`password`='$newPass',`name`='$name' WHERE id_user=$id";
                 $result = mysqli_query($this->con, $qr);
-            } elseif ($password=='' && $newPass==''&& $repassword=='') {
-                $qr = "UPDATE tbl_users SET `name` ='$userName',`company`='$location',`SID` = '$SID' ,`token` = '$token',`number`='$phoneUser',`email`='$email'  WHERE id_user= $id ";
+            } elseif ($password=='' && $newPass==''&& $rePassword=='') {
+                $qr = "UPDATE tbl_users SET `username` ='$userName',`company`='$location',`SID` = '$SID' ,`token` = '$token',`number`='$phoneUser',`email`='$email',`name`='$name'  WHERE id_user= $id ";
                 $result = mysqli_query($this->con, $qr);
                
             } else{
